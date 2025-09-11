@@ -51,11 +51,24 @@ def ask(query: str):
     prompt = "\n".join(context) + f"\n\nUser question: {query}"
     try:
         response = generate_commit_message(prompt, config)
-    except (
-        RuntimeError
-    ):  # Replace with the specific exception type raised by generate_commit_message
+    except Exception as e:
+        typer.echo(f"Generation failed: {e}")
         response = fallback_commit_message([])
     typer.echo(response)
+
+
+# `serve` — Start local API server (placeholder)
+@app.command()
+def serve(port: int = 8000):
+    """
+    Start a local API server for integrations.
+    
+    Args:
+        port (int): Port number to serve on. Defaults to 8000.
+    """
+    typer.echo(f"API server functionality not implemented yet.")
+    typer.echo(f"Would start server on port {port}")
+    raise typer.Exit(1)
 
 
 # `commit` — Git Diff + Message Generation
@@ -93,8 +106,6 @@ def commit(preview: bool = True, apply: bool = False, dry_run: bool = False):
         subprocess.run(["git", "commit", "-m", message])
 
 
-from sentence_transformers import SentenceTransformer
-
-model = SentenceTransformer("./models/embeddinggemma-300m")
-emb = model.encode("Test string")
-print("Embedding shape:", emb.shape)  # Should be (768,)
+# Entry point for CLI application
+if __name__ == "__main__":
+    app()
