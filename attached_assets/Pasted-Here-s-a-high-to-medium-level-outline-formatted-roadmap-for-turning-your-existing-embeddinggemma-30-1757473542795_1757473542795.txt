@@ -1,0 +1,82 @@
+Here’s a high-to-medium-level, outline-formatted roadmap for turning your existing embeddinggemma-300m setup into a unified CLI tool powered by Phi-2. No code snippets—just clear steps and gap-checks.
+
+1. Define Your Modular Surface
+Embedder
+
+Uses google/embeddinggemma-300m to turn text into vectors
+
+Retriever
+
+Indexes and searches embeddings (e.g., FAISS or Chroma)
+
+Generator
+
+Runs Phi-2 (2.7 B) for response generation based on retrieved context
+
+CLI
+
+Ties everything together with a command-line interface (e.g., Typer)
+
+2. Prepare Your Conda Environment
+Confirm sentence-transformers and transformers are installed
+
+Add your vector store library (FAISS/Chroma)
+
+Install any quantization/runtime helpers for Phi-2 (GGUF, bitsandbytes, etc.)
+
+Allocate model cache paths under your project (e.g., ./models/)
+
+3. Acquire and Optimize Phi-2
+Download the Phi-2 weights from Hugging Face or Azure AI Studio
+
+Quantize to Q4/Q5 to fit within ~6–8 GB of RAM on your i5/16 GB rig
+
+Validate loading speed and memory footprint in isolation before integration
+
+4. Sketch Your Data Flow
+User Input: typed command + query text
+
+Embedding: call Gemma → vector
+
+Retrieval: query vector → top-k document vectors
+
+Context Assembly: stitch retrieved snippets
+
+Generation: feed context + user prompt into Phi-2 → text answer
+
+Output: print or save response
+
+5. Fill Logic Holes
+You need a vector store backend; plain in-memory lists won’t scale
+
+Chunk larger documents before embedding (e.g., 500 token windows)
+
+Watch Phi-2’s context window (typically ~2 K tokens) and trim if needed
+
+Plan caching: don’t re-embed the same files on every run
+
+Design a config file for model paths, thresholds, and CLI defaults
+
+6. Organize Your Directory
+Code
+gemma-phi2-cli/
+├── models/
+│   ├── embeddinggemma-300m/
+│   └── phi2-quantized/
+├── data/
+│   └── index/            # FAISS/Chroma files
+├── src/
+│   ├── embedder.py       # wraps Gemma
+│   ├── retriever.py      # builds & queries index
+│   ├── generator.py      # wraps Phi-2
+│   └── cli.py            # Typer entry point
+├── config.yaml           # model locations, hyperparams
+└── README.md
+7. Plan Your CLI Commands
+init → create or update index from a target directory
+
+search → semantic lookup, returns file names + scores
+
+ask → retrieval + generation in one step
+
+serve → optional local API for integrations

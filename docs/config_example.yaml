@@ -1,0 +1,7 @@
+embedding:
+  model_path: "./models/embeddinggemma-300m"
+  dim: 768
+  truncate_to: 128
+retrieval:
+  top_k: 5
+  similarity_threshold: 0.75

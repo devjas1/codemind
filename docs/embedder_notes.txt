@@ -1,0 +1,1 @@
+EmbeddingGemma-300m outputs 768-dimensional vectors. For performance, we truncate to 128 dimensions using Matryoshka representation. Batch size should be tuned based on available RAM.
