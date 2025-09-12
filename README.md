@@ -1,226 +1,328 @@
-# CodeMind
+# CodeMind: Local AI Development Assistant
 
-A CLI tool for intelligent document analysis and commit message generation using EmbeddingGemma-300m for embeddings, FAISS for vector storage, and Phi-2 for text generation.
+CodeMind is an AI-powered development assistant that runs entirely on your local machine. It helps you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
 
 ## Features
 
-- **Document Indexing**: Embed and index documents for semantic search
-- **Semantic Search**: Find relevant documents using natural language queries
-- **Smart Commit Messages**: Generate meaningful commit messages from staged git changes
-- **RAG (Retrieval-Augmented Generation)**: Answer questions using indexed document context
+- **Semantic Code Search**: Find relevant code and documentation using AI-powered semantic search
+- **Commit Message Generation**: Automatically generate descriptive commit messages based on your changes
+- **Local Processing**: All AI processing happens on your machine with no data sent to cloud services
+- **Flexible Configuration**: Customize models and parameters to suit your specific needs
+- **FAISS Integration**: Efficient vector similarity search for fast retrieval
+- **Multiple Model Support**: Compatible with GGUF and SentenceTransformers models
 
-## Setup
+## Prerequisites
 
-### Prerequisites
+- **Python 3.8 or higher**
+- **8GB+ RAM** recommended (for running language models)
+- **4GB+ disk space** for model files
+- **Git** for repository cloning
 
-- Windows 11
-- Conda environment
-- Git
+### Platform Recommendations
 
-### Installation
+- **Linux** (Recommended for best compatibility)
+- **macOS** (Good compatibility)
+- **Windows** (May require additional setup for some dependencies)
 
-1. **Create a Conda environment:**
+## Installation
 
-   ```bash
-   conda create -n codemind python=3.9
-   conda activate codemind
-   ```
+### 1. Clone the Repository
 
-2. **Clone the repository:**
+```bash
+git clone https://github.com/devjas1/codemind.git
+cd codemind
+```
 
-   ```bash
-   git clone https://github.com/devjas1/codemind.git
-   cd codemind
-   ```
+### 2. Set Up Python Environment
 
-3. **Install dependencies:**
+Create and activate a virtual environment:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
 
-4. **Download models:**
+# Create virtual environment
+python -m venv venv
 
-   **Embedding Model (EmbeddingGemma-300m):**
+# Activate on macOS/Linux
+source venv/bin/activate
 
-   - Download from Hugging Face: `google/embeddinggemma-300m`
-   - Place in `./models/embeddinggemma-300m/` directory
+# Activate on Windows
+venv\Scripts\activate
+```
 
-   **Generation Model (Phi-2 GGUF):**
+### 3. Install Dependencies
 
-   - Download the quantized Phi-2 model: `phi-2.Q4_0.gguf`
-   - Place in `./models/` directory
-   - Download from: [Microsoft Phi-2 GGUF](https://huggingface.co/microsoft/phi-2-gguf) or similar quantized versions
+```bash
+pip install -r requirements.txt
+```
+
+**Note**: If you encounter installation errors related to C++/PyTorch/FAISS:
+
+- Ensure you have Python development tools installed
+- Linux/macOS are preferred for FAISS compatibility
+- On Windows, you may need to install Visual Studio Build Tools
+
+## Model Setup
 
 ### Directory Structure
 
-```
-CodeMind/
-├── cli.py                      # Main CLI entry point
-├── config.yaml                 # Configuration file
-├── requirements.txt            # Python dependencies
-├── models/                     # Model storage
-│   ├── embeddinggemma-300m/    # Embedding model directory
-│   └── phi-2.Q4_0.gguf        # Phi-2 quantized model file
-├── src/                        # Core modules
-│   ├── config_loader.py        # Configuration management
-│   ├── embedder.py             # Document embedding
-│   ├── retriever.py            # Semantic search
-│   ├── generator.py            # Text generation
-│   └── diff_analyzer.py        # Git diff analysis
-├── docs/                       # Documentation
-└── vector_cache/              # FAISS index storage (auto-created)
+Create the following directory structure for model files:
+
+```text
+models/
+  ├── phi-2.Q4_0.gguf              # For commit message generation (Phi-2 model)
+  └── embeddinggemma-300m/         # For document embedding (EmbeddingGemma model)
+      └── [model files here]
 ```
 
-## Usage
+### Downloading Models
 
-### Initialize Document Index
+1. **Phi-2 Model** (for commit message generation):
 
-Index documents from a directory for semantic search:
+   - Download `phi-2.Q4_0.gguf` from a trusted source
+   - Place it in the `models/` directory
 
-```bash
-python cli.py init ./docs/
-```
+2. **EmbeddingGemma Model** (for document embedding):
 
-This will:
+   - Download the EmbeddingGemma-300m model files
+   - Place all files in the `models/embeddinggemma-300m/` directory
 
-- Embed all documents in the specified directory
-- Create a FAISS index in `vector_cache/`
-- Save metadata for retrieval
-
-### Semantic Search
-
-Search for relevant documents using natural language:
-
-```bash
-python cli.py search "how to configure the model"
-```
-
-Returns ranked results with similarity scores.
-
-### Ask Questions (RAG)
-
-Get answers based on your indexed documents:
-
-```bash
-python cli.py ask "What are the configuration options?"
-```
-
-Uses retrieval-augmented generation to provide contextual answers.
-
-### Git Commit Message Generation
-
-Generate intelligent commit messages from staged changes:
-
-```bash
-# Preview commit message without applying
-python cli.py commit --preview
-
-# Show staged files and analysis without generating message
-python cli.py commit --dry-run
-
-# Generate and apply commit message
-python cli.py commit --apply
-```
-
-### Start API Server (Future Feature)
-
-```bash
-python cli.py serve --port 8000
-```
-
-_Note: API server functionality is planned for future releases._
+> **Note**: The specific process for obtaining these models may vary. Check the documentation in each model folder for detailed instructions.
 
 ## Configuration
 
-Edit `config.yaml` to customize behavior:
+Edit the `config.yaml` file to match your local setup:
 
 ```yaml
-embedding:
-  model_path: "./models/embeddinggemma-300m"
-  dim: 768
-  truncate_to: 128
-
+# Model configuration for commit message generation
 generator:
   model_path: "./models/phi-2.Q4_0.gguf"
   quantization: "Q4_0"
   max_tokens: 512
   n_ctx: 2048
 
+# Model configuration for document embedding
+embedding:
+  model_path: "./models/embeddinggemma-300m"
+
+# Retrieval configuration for semantic search
 retrieval:
   vector_store: "faiss"
-  top_k: 5
-  similarity_threshold: 0.75
-
-commit:
-  tone: "imperative"
-  style: "conventional"
-  max_length: 72
-
-logging:
-  verbose: true
-  telemetry: false
+  top_k: 5 # Number of results to return
+  similarity_threshold: 0.7 # Minimum similarity score (0.0 to 1.0)
 ```
 
-### Configuration Options
+### Configuration Tips
 
-- **embedding.model_path**: Path to the EmbeddingGemma-300m model
-- **generator.model_path**: Path to the Phi-2 GGUF model file
-- **retrieval.top_k**: Number of documents to retrieve for context
-- **retrieval.similarity_threshold**: Minimum similarity score for results
-- **generator.max_tokens**: Maximum tokens for generation
-- **generator.n_ctx**: Context window size for Phi-2
+- Adjust `top_k` to control how many results are returned for each query
+- Modify `similarity_threshold` to filter results by relevance
+- Ensure all file paths are correct for your system
+- For larger codebases, you may need to increase `max_tokens`
 
-## Dependencies
+## Indexing Documents
 
-- `sentence-transformers>=2.2.2` - Document embedding
-- `faiss-cpu>=1.7.4` - Vector similarity search
-- `llama-cpp-python>=0.2.23` - Phi-2 model inference (Windows compatible)
-- `typer>=0.9.0` - CLI framework
-- `PyYAML>=6.0` - Configuration file parsing
-
-## Troubleshooting
-
-### Model Loading Issues
-
-If you encounter model loading errors:
-
-1. **Embedding Model**: Ensure `embeddinggemma-300m` is a directory containing all model files
-2. **Phi-2 Model**: Ensure `phi-2.Q4_0.gguf` is a single GGUF file
-3. **Paths**: All paths in `config.yaml` should be relative to the project root
-
-### Memory Issues
-
-For systems with limited RAM:
-
-- Use Q4_0 quantization for Phi-2 (already configured)
-- Reduce `n_ctx` in config.yaml if needed
-- Process documents in smaller batches
-
-### Windows-Specific Issues
-
-- Ensure `llama-cpp-python` version supports Windows
-- Use PowerShell or Command Prompt for CLI commands
-- Check file path separators in configuration
-
-## Development
-
-To test the modules:
+To enable semantic search over your documentation or codebase, you need to create a FAISS index:
 
 ```bash
-python -c "from src import *; print('All modules imported successfully')"
+# Basic usage
+python src/embedder.py path/to/your/documents config.yaml
+
+# Example with docs directory
+python src/embedder.py ./docs config.yaml
+
+# Example with specific code directory
+python src/embedder.py ./src config.yaml
 ```
 
-To run in development mode:
+This process:
+
+1. Reads all documents from the specified directory
+2. Generates embeddings using the configured model
+3. Creates a FAISS index in the `vector_cache/` directory
+4. Enables fast semantic search capabilities
+
+> **Note**: The indexing process may take several minutes depending on the size of your codebase and your hardware capabilities.
+
+## Usage
+
+### Command Line Interface
+
+Run the main CLI interface:
+
+```bash
+python cli.py
+```
+
+### Available Commands
+
+#### Get Help
 
 ```bash
 python cli.py --help
 ```
 
-## License
+#### Ask Questions About Your Codebase
 
-[Insert your license information here]
+```bash
+python cli.py ask "How does this repository work?"
+python cli.py ask "Where is the main configuration handled?"
+python cli.py ask "Show me examples of API usage"
+```
+
+#### Generate Commit Messages
+
+```bash
+# Preview a generated commit message
+python cli.py commit --preview
+
+# Generate commit message without preview
+python cli.py commit
+```
+
+#### API Server (Placeholder)
+
+```bash
+python cli.py serve --port 8000
+```
+
+> **Note**: The API server functionality is not yet implemented. This command will display: "API server functionality not implemented yet."
+
+### Advanced Usage
+
+For more advanced usage, you can modify the configuration to:
+
+- Use different models for specific tasks
+- Adjust the context window size for larger documents
+- Customize the similarity threshold for retrieval
+- Use different vector stores (though FAISS is currently the only supported option)
+
+## Troubleshooting
+
+### Common Issues
+
+#### Model Errors
+
+**Problem**: Model files not found or inaccessible  
+**Solution**:
+
+- Verify model files are in the correct locations
+- Check file permissions
+- Ensure the paths in `config.yaml` are correct
+
+#### FAISS Errors
+
+**Problem**: "No FAISS index found" error  
+**Solution**:
+
+- Run the embedder script to create the index
+- Ensure the `vector_cache/` directory has write permissions
+
+```bash
+python src/embedder.py path/to/documents config.yaml
+```
+
+#### SentenceTransformers Issues
+
+**Problem**: Compatibility errors with SentenceTransformers  
+**Solution**:
+
+- Check that the model format is compatible with SentenceTransformers
+- Verify the version in requirements.txt
+- Ensure all model files are present in the model directory
+
+#### Performance Issues
+
+**Problem**: Slow response times  
+**Solution**:
+
+- Ensure you have adequate RAM
+- Consider using smaller quantized models
+- Close other memory-intensive applications
+
+#### Platform-Specific Issues
+
+**Windows-specific issues**:
+
+- FAISS may require additional compilation
+- Path separators may need adjustment in configuration
+
+**macOS/Linux**:
+
+- Generally fewer compatibility issues
+- Ensure you have write permissions for all directories
+
+### Validation Checklist
+
+- All model files present in correct directories
+- FAISS index built in `vector_cache/`
+- `config.yaml` paths match your local setup
+- Python environment activated
+- All dependencies installed
+- Adequate disk space available
+- Sufficient RAM available
+
+### Getting Detailed Error Information
+
+For specific errors, run commands with verbose output:
+
+```bash
+# Add debug flags if available
+python cli.py --verbose ask "Your question"
+```
+
+## Project Structure
+
+```text
+codemind/
+├── models/                 # AI model files
+│   ├── phi-2.Q4_0.gguf    # Phi-2 model for generation
+│   └── embeddinggemma-300m/ # Embedding model
+│       └── [model files]
+├── src/                   # Source code
+│   └── embedder.py        # Document embedding script
+├── vector_cache/          # FAISS vector store (auto-generated)
+├── config.yaml           # Configuration file
+├── requirements.txt      # Python dependencies
+├── cli.py               # Command-line interface
+└── README.md            # This file
+```
+
+## FAQ
+
+### Q: Can I use different models?
+
+> **A**: Yes, you can use any GGUF-compatible model for generation and any SentenceTransformers-compatible model for embeddings. Update the paths in `config.yaml` accordingly.
+
+### Q: How much RAM do I need?
+
+> **A**: For the Phi-2 Q4_0 model, 8GB RAM is recommended. Larger models will require more memory.
+
+### Q: Can I index multiple directories?
+
+> **A**: Yes, you can run the embedder script multiple times with different directories, or combine your documents into one directory before indexing.
+
+### Q: Is my data sent to the cloud?
+
+> **A**: No, all processing happens locally on your machine. No code or data is sent to external services.
+
+### Q: How often should I re-index my documents?
+
+> **A**: Re-index whenever your documentation or codebase changes significantly to keep search results relevant.
+
+## Support
+
+If you encounter issues:
+
+1. Check the troubleshooting section above
+2. Verify all model files are in correct locations
+3. Confirm Python and library versions match requirements
+4. Ensure proper directory permissions
+
+For specific errors, please include the full traceback when seeking assistance.
 
 ## Contributing
 
-[Insert contribution guidelines here]
+Contributions to CodeMind are welcome! Please feel free to submit pull requests, create issues, or suggest new features.
+
+## License
+
+This project is licensed under the terms of the LICENSE file included in the repository.

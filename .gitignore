@@ -44,3 +44,4 @@ ENV/
 
 # Vector cache
 vector_cache/
+models/embeddinggemma-300m/README.md
