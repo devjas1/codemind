@@ -45,3 +45,36 @@ ENV/
 # Vector cache
 vector_cache/
 models/embeddinggemma-300m/README.md
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/added_tokens.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/config_sentence_transformers.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/model.safetensors
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/modules.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/README.md
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/sentence_bert_config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/special_tokens_map.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/tokenizer_config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/tokenizer.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/tokenizer.model
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/1_Pooling/config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/2_Dense/config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/2_Dense/model.safetensors
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/3_Dense/config.json
+models/embeddinggemma-300m/c5cfa06e5e282a820e85d57f7fb053207494f41d/3_Dense/model.safetensors
+models/embeddinggemma-300m/added_tokens.json
+models/embeddinggemma-300m/config_sentence_transformers.json
+models/embeddinggemma-300m/config.json
+models/embeddinggemma-300m/model.safetensors
+models/embeddinggemma-300m/modules.json
+models/embeddinggemma-300m/README copy.md
+models/embeddinggemma-300m/special_tokens_map.json
+models/embeddinggemma-300m/sentence_bert_config.json
+models/embeddinggemma-300m/tokenizer_config.json
+models/embeddinggemma-300m/tokenizer.json
+models/embeddinggemma-300m/tokenizer.model
+models/embeddinggemma-300m/2_Dense/config.json
+models/embeddinggemma-300m/1_Pooling/config.json
+models/embeddinggemma-300m/3_Dense/model.safetensors
+models/embeddinggemma-300m/3_Dense/config.json
+models/embeddinggemma-300m/2_Dense/model.safetensors
+models/embeddinggemma-300m/embgemma-300m-model-card.md
