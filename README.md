@@ -1,4 +1,15 @@
-# CodeMind: Local AI Development Assistant
+---
+title: CodeMind
+emoji: 🏆
+colorFrom: purple
+colorTo: indigo
+sdk: static
+pinned: false
+license: apache-2.0
+short_description: AI-powered development assistant CLI Tool
+---
+
+## CodeMind: Local AI Development Assistant
 
 CodeMind is an AI-powered development assistant that runs entirely on your local machine. It helps you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
 
