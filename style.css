@@ -273,13 +273,14 @@ section h3 {
 .code-block {
     background: #23272f;
     color: #f8f8f2;
-    padding: 1.7rem;
+    padding: 2rem;
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.7rem 0;
     font-family: 'Fira Mono', 'Courier New', monospace;
     font-size: 1.05rem;
     box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+    min-width: 285px;
 }
 
 .code-comment {
@@ -287,9 +288,13 @@ section h3 {
 }
 
 .setup-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
+    display: flex;
+    flex-wrap: ;
+    text-align: left;
+    gap: .4rem;
+    margin: 0 auto;
+    min-width: -webkit-fill-available;
+    min-width: auto;
 }
 
 .setup-card {
@@ -297,7 +302,7 @@ section h3 {
     padding: 2.2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
-    border: 1px solid #ececec;
+    border: 1px double #ececec;
 }
 
 .faq-list {
