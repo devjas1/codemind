@@ -4,19 +4,280 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>My static Space</title>
-    <link rel="stylesheet" href="style.css" rel="noopener" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CodeMind - AI-Powered Development Assistant</title>
 </head>
 
 <body>
-    <div class="card">
-        <h1>Welcome to your static Space!</h1>
-        <p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-        <p>
-            Also don't forget to check the
-            <a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spacesedocumentation</a>.
-        </p>
-    </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span class="logo-icon">🔧</span> CodeMind
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#why">Why CodeMind</a></li>
+                    <li><a href="#how">How It Works</a></li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li><a href="#setup">Setup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Development Assistant</h1>
+            <p>CodeMind is an AI-powered development assistant that runs entirely on your local machine for intelligent
+                document analysis and commit message generation.</p>
+            <a href="#setup" class="btn">Get Started</a>
+            <a href="#features" class="btn btn-outline">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Document Embedding</h3>
+                    <p>Using EmbeddingGemma-300m to create semantic representations of your documentation and code.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Semantic Search</h3>
+                    <p>Using FAISS for vector similarity search to find relevant content based on meaning, not just
+                        keywords.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Commit Message Generation</h3>
+                    <p>Automatically generate descriptive commit messages based on your changes using Phi-2 model.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Retrieval-Augmented Generation</h3>
+                    <p>Answers questions using your indexed document context for accurate, relevant responses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Local Processing</h3>
+                    <p>All AI processing happens on your machine with no data sent to cloud services.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Flexible Configuration</h3>
+                    <p>Customize models and parameters to suit your specific needs and preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Section -->
+    <section id="why" class="why">
+        <div class="container">
+            <h2>Why CodeMind?</h2>
+            <div class="why-content">
+                <p>CodeMind brings together document semantic search, retrieval-augmented Q&A, and AI-powered commit
+                    message generation to help you work faster and smarter by leveraging your own project context.</p>
+
+                <h3>Efficient Knowledge Retrieval</h3>
+                <p>Makes searching and querying documentation more powerful by using semantic embeddings rather than
+                    keyword search.</p>
+
+                <h3>Smarter Git Workflow</h3>
+                <p>Automates the creation of meaningful commit messages by analyzing git diffs and using an LLM to
+                    summarize changes.</p>
+
+                <h3>AI-Powered Documentation</h3>
+                <p>Enables you to ask questions about your project, using your own docs/context rather than just generic
+                    answers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="how">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="how-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Document Indexing</h3>
+                        <p>The app uses EmbeddingGemma-300m via sentence-transformers to embed documents. Embeddings are
+                            normalized and stored in a FAISS vector index for efficient similarity search. Metadata
+                            (document text and filenames) are stored alongside the index.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Semantic Search</h3>
+                        <p>When you search, your query is embedded using the same embedding model. FAISS searches for
+                            the most similar documents based on cosine similarity. Results are filtered by a similarity
+                            threshold and returned with scores.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Retrieval-Augmented Generation (RAG)</h3>
+                        <p>When you ask a question, the system retrieves relevant docs (via semantic search). The
+                            retrieved context is fed to the Phi-2 LLM, which generates an answer using both your
+                            question and the context.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Commit Message Generation</h3>
+                        <p>Analyzes your staged git changes (via a diff analyzer). Summarizes changes and sends them to
+                            the Phi-2 LLM, which generates a commit message aligned to your config (tone, style,
+                            length).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage -->
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2>Usage Examples</h2>
+
+            <h3>Index Your Documentation</h3>
+            <div class="code-block">
+                <span class="code-comment"># Index documents in the docs directory</span><br>
+                python cli.py init ./docs/
+            </div>
+
+            <h3>Semantic Search</h3>
+            <div class="code-block">
+                <span class="code-comment"># Search for relevant documentation</span><br>
+                python cli.py search "how to configure the model"
+            </div>
+
+            <h3>Ask Questions (RAG)</h3>
+            <div class="code-block">
+                <span class="code-comment"># Ask questions about your project</span><br>
+                python cli.py ask "What are the configuration options?"
+            </div>
+
+            <h3>Generate Commit Messages</h3>
+            <div class="code-block">
+                <span class="code-comment"># Preview a generated commit message</span><br>
+                python cli.py commit --preview<br><br>
+
+                <span class="code-comment"># Generate and apply commit message</span><br>
+                python cli.py commit --apply
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup -->
+    <section id="setup" class="setup">
+        <div class="container">
+            <h2>Setup & Installation</h2>
+
+            <div class="setup-cards">
+                <div class="setup-card">
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li>Python 3.8 or higher</li>
+                        <li>8GB+ RAM recommended</li>
+                        <li>4GB+ disk space for model files</li>
+                        <li>Git for repository cloning</li>
+                    </ul>
+                </div>
+
+                <div class="setup-card">
+                    <h3>Installation</h3>
+                    <div class="code-block">
+                        <span class="code-comment"># Clone the repository</span><br>
+                        git clone https://github.com/devjas1/codemind.git<br>
+                        cd codemind<br><br>
+
+                        <span class="code-comment"># Create virtual environment</span><br>
+                        python -m venv venv<br><br>
+
+                        <span class="code-comment"># Activate on macOS/Linux</span><br>
+                        source venv/bin/activate<br><br>
+
+                        <span class="code-comment"># Install dependencies</span><br>
+                        pip install -r requirements.txt
+                    </div>
+                </div>
+
+                <div class="setup-card">
+                    <h3>Model Setup</h3>
+                    <p>Download these models:</p>
+                    <ul>
+                        <li>Phi-2 Model for commit message generation</li>
+                        <li>EmbeddingGemma-300m for document embedding</li>
+                    </ul>
+                    <p>Place them in the models/ directory as specified in the configuration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Can I use different models?</div>
+                    <p>Yes, you can use any GGUF-compatible model for generation and any SentenceTransformers-compatible
+                        model for embeddings. Update the paths in config.yaml accordingly.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How much RAM do I need?</div>
+                    <p>For the Phi-2 Q4_0 model, 8GB RAM is recommended. Larger models will require more memory.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is my data sent to the cloud?</div>
+                    <p>No, all processing happens locally on your machine. No code or data is sent to external services.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How often should I re-index my documents?</div>
+                    <p>Re-index whenever your documentation or codebase changes significantly to keep search results
+                        relevant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🔧</span> CodeMind
+            </div>
+            <p>AI-powered development assistant for your local machine</p>
+
+            <ul class="footer-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#why">Why</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="#setup">Setup</a></li>
+            </ul>
+
+            <p>&copy; 2023 CodeMind. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
