@@ -341,3 +341,5 @@ Contributions to CodeMind are welcome! Please feel free to submit pull requests,
 ## License
 
 This project is licensed under the terms of the LICENSE file included in the repository.
+
+© 2025 CodeMind. All rights reserved.
