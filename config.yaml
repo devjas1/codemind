@@ -4,8 +4,8 @@ embedding:
   truncate_to: 128
 
 generator:
-  model_path: "./models/phi-2.Q4_0.gguf"
-  quantization: "Q4_0"
+  model_path: "./models/phi2.Q/phi-2.Q3_K_M.gguf"
+  quantization: "Q3_K_M"
   max_tokens: 512
   n_ctx: 2048
 
