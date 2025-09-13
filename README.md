@@ -2,12 +2,14 @@
 
 **CodeMind** is a AI-powered development assistant that runs entirely on your local machine for intelligent document analysis and commit message generation. It leverages modern machine learning models for: helping you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
 
-- **Efficient Knowledge Retrieval**: Makes searching and querying documentation more powerful by using semantic embeddings rather than keyword search.
+- **Efficient Knowledge Retrieval**: Makes searching and querying documentation more power☺ful by using semantic embeddings rather than keyword search.
 - **Smarter Git Workflow**: Automates the creation of meaningful commit messages by analyzing git diffs and using an LLM to summarize changes.
 - **AI-Powered Documentation**: Enables you to ask questions about your project, using your own docs/context rather than just generic answers.
 
 **Check it out on Hugging Face Spaces:**  
 [![HuggingFace](https://img.shields.io/badge/-HuggingFace-FDEE21?style=for-the-badge&logo=HuggingFace&logoColor=black)](https://huggingface.co/spaces/dev-jas/CodeMind)
+
+---
 
 ## Features
 
@@ -297,24 +299,27 @@ codemind/
 
 ## FAQ
 
-### Q: Can I use different models?
+> **Q:** **Can I use different models?**  
+> **A:** Yes, you can use any GGUF-compatible model for generation and any SentenceTransformers-compatible model for embeddings. Update the paths in `config.yaml` accordingly.
 
-> **A**: Yes, you can use any GGUF-compatible model for generation and any SentenceTransformers-compatible model for embeddings. Update the paths in `config.yaml` accordingly.
+---
 
-### Q: How much RAM do I need?
-
+> **Q:** **How much RAM do I need?**  
 > **A**: For the Phi-2 Q4_0 model, 8GB RAM is recommended. Larger models will require more memory.
 
-### Q: Can I index multiple directories?
+---
 
+> **Q:** **Can I index multiple directories?**  
 > **A**: Yes, you can run the embedder script multiple times with different directories, or combine your documents into one directory before indexing.
 
-### Q: Is my data sent to the cloud?
+---
 
+> **Q:** **Is my data sent to the cloud?**  
 > **A**: No, all processing happens locally on your machine. No code or data is sent to external services.
 
-### Q: How often should I re-index my documents?
+---
 
+> **Q:** **How often should I re-index my documents?**  
 > **A**: Re-index whenever your documentation or codebase changes significantly to keep search results relevant.
 
 ## Support
