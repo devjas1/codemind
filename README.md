@@ -1,14 +1,3 @@
----
-title: CodeMind
-emoji: 🔧
-colorFrom: purple
-colorTo: indigo
-sdk: static
-pinned: false
-license: apache-2.0
-short_description: AI-powered development assistant CLI Tool
----
-
 **CodeMind** is a AI-powered development assistant that runs entirely on your local machine for intelligent document analysis and commit message generation. It leverages modern machine learning models for: helping you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
 
 - **Efficient Knowledge Retrieval**: Makes searching and querying documentation more powerful by using semantic embeddings rather than keyword search.
@@ -343,3 +332,4 @@ Contributions to CodeMind are welcome! Please feel free to submit pull requests,
 This project is licensed under the terms of the LICENSE file included in the repository.
 
 © 2025 CodeMind. All rights reserved.
+
