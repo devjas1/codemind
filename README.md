@@ -1,6 +1,6 @@
 ---
 title: CodeMind
-emoji: 🏆
+emoji: 🔧
 colorFrom: purple
 colorTo: indigo
 sdk: static
@@ -9,14 +9,18 @@ license: apache-2.0
 short_description: AI-powered development assistant CLI Tool
 ---
 
-## CodeMind: Local AI Development Assistant
+**CodeMind** is a AI-powered development assistant that runs entirely on your local machine for intelligent document analysis and commit message generation. It leverages modern machine learning models for: helping you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
 
-CodeMind is an AI-powered development assistant that runs entirely on your local machine. It helps you understand your codebase through semantic search and generates meaningful commit messages using locally hosted language models, ensuring complete privacy and no cloud dependencies.
+- **Efficient Knowledge Retrieval**: Makes searching and querying documentation more powerful by using semantic embeddings rather than keyword search.
+- **Smarter Git Workflow**: Automates the creation of meaningful commit messages by analyzing git diffs and using an LLM to summarize changes.
+- **AI-Powered Documentation**: Enables you to ask questions about your project, using your own docs/context rather than just generic answers.
 
 ## Features
 
-- **Semantic Code Search**: Find relevant code and documentation using AI-powered semantic search
-- **Commit Message Generation**: Automatically generate descriptive commit messages based on your changes
+- **Document Embedding** (using [EmbeddingGemma-300m](https://huggingface.co/google/embeddinggemma-300m))
+- **Semantic Search** (using [FAISS](https://github.com/facebookresearch/faiss) for vector similarity search)
+- **Commit Message Generation** (using [Phi-2](https://huggingface.co/microsoft/phi-2-gguf) for text generation): Automatically generate descriptive commit messages based on your changes
+- **Retrieval-Augmented Generation (RAG)**: Answers questions using indexed document context
 - **Local Processing**: All AI processing happens on your machine with no data sent to cloud services
 - **Flexible Configuration**: Customize models and parameters to suit your specific needs
 - **FAISS Integration**: Efficient vector similarity search for fast retrieval
